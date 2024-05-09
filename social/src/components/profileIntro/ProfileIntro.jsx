@@ -171,11 +171,9 @@ const ProfileIntro = () => {
         }else{
             preVal.push(imageValue)
         }
-
         setFeatureChecked(preVal)
 
     }
-
 
 
     const handleFeaturedPhoto = (e) => {
@@ -185,7 +183,6 @@ const ProfileIntro = () => {
         featureChecked.forEach(item=>{
             data.append('featured',item)
         })
-
         dispatch(featuredPhotos(data, user._id))
 
         setFeatureUploadShow(false)
@@ -573,10 +570,12 @@ const ProfileIntro = () => {
                     }
 
 
-                    <div className="item">
-                        <a href=""><HiExclamationCircle className="icon"/></a>
-                        <p className="subtitle">Profile- {user.category}</p>
-                    </div>
+                    {
+                        user.category && <div className="item">
+                            <a href=""><HiExclamationCircle className="icon"/></a>
+                            <p className="subtitle">Profile- {user.category}</p>
+                        </div>
+                    }
 
                     {
                         user.work.map((item, index) =>
@@ -589,26 +588,38 @@ const ProfileIntro = () => {
                     }
 
 
-                    <div className="item">
-                        <a href=""><FaLayerGroup className="icon"/></a>
-                        <p className="subtitle">Went to {user.school}</p>
-                    </div>
-                    <div className="item">
-                        <a href=""><FaLayerGroup className="icon"/></a>
-                        <p className="subtitle">University- {user.university}</p>
-                    </div>
-                    <div className="item">
-                        <a href=""><FaHouseCircleCheck className="icon"/></a>
-                        <p className="subtitle">Lives in {user.living}</p>
-                    </div>
-                    <div className="item">
-                        <a href=""><IoLocationSharp className="icon"/></a>
-                        <p className="subtitle">from {user.home_town}</p>
-                    </div>
-                    <div className="item">
-                        <a href=""><FaHeart className="icon"/></a>
-                        <p className="subtitle">{user.relationShipStatus}</p>
-                    </div>
+                    {
+                        user.school && <div className="item">
+                            <a href=""><FaLayerGroup className="icon"/></a>
+                            <p className="subtitle">Went to {user.school}</p>
+                        </div>
+                    }
+                    {
+                        user.university && <div className="item">
+                            <a href=""><FaLayerGroup className="icon"/></a>
+                            <p className="subtitle">University- {user.university}</p>
+                        </div>
+                    }
+                    {
+                        user.living && <div className="item">
+                            <a href=""><FaHouseCircleCheck className="icon"/></a>
+                            <p className="subtitle">Lives in {user.living}</p>
+                        </div>
+                    }
+                    {
+                        user.home_town && <div className="item">
+                            <a href=""><IoLocationSharp className="icon"/></a>
+                            <p className="subtitle">from {user.home_town}</p>
+                        </div>
+                    }
+
+                    {
+                        user.relationShipStatus && <div className="item">
+                            <a href=""><FaHeart className="icon"/></a>
+                            <p className="subtitle">{user.relationShipStatus}</p>
+                        </div>
+                    }
+
                     <div className="item">
                         <a href=""><BsCalendar2DateFill className="icon"/></a>
                         <p className="subtitle">Join- February, 2010</p>

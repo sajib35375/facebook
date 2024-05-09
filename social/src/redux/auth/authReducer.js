@@ -1,10 +1,10 @@
 import {initialState} from "./initialState";
 import {
     BIO_UPDATE_FAIL,
-    BIO_UPDATE_SUCCESS,
+    BIO_UPDATE_SUCCESS, FRIEND_REQUEST_CONFIRM, FRIEND_REQUEST_SEND, GET_ALL_USER,
     LOGIN_FAIL,
     LOGIN_REQUEST,
-    LOGIN_SUCCESS,
+    LOGIN_SUCCESS, PROFILE_PHOTO_UPLOAD,
     REGISTER_FAIL,
     REGISTER_REQUEST,
     REGISTER_SUCCESS, TOKEN_USER_FAIL, TOKEN_USER_REQ, TOKEN_USER_SUCCESS, USER_LOGOUT
@@ -88,6 +88,34 @@ const authReducer = (state=initialState, { type, payload }) => {
                 ...state,
                 user: null
 
+            };
+
+        case PROFILE_PHOTO_UPLOAD:
+            return{
+                ...state,
+                user: {
+                    ...state.user,
+                    profile_photo: payload
+                }
+
+            };
+
+        case GET_ALL_USER:
+            return{
+                ...state,
+                users: payload
+            };
+
+        case FRIEND_REQUEST_SEND:
+            return{
+                ...state,
+                user:payload
+            };
+
+        case FRIEND_REQUEST_CONFIRM:
+            return{
+                ...state,
+                user:payload
             };
 
         default :

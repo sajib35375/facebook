@@ -252,10 +252,10 @@ export const userLogin = async (req,res,next) => {
         }
 
         if (isEmail(auth)) {
-            const user = await User.findOne({email: auth});
+            const user = await User.findOne({email: auth, isActivate: true});
 
             if (!user) {
-                return next(createError(400, 'Invalid Email Address'))
+                return next(createError(400, 'User not valid'))
 
             }
 
@@ -263,7 +263,8 @@ export const userLogin = async (req,res,next) => {
                 if (!passwordCheck(password, user.password)) {
                     return next(createError(400, 'Wrong password'))
 
-                } else {
+
+                }else {
 
                     const token = createToken({id: user._id}, '365d')
 
@@ -272,17 +273,17 @@ export const userLogin = async (req,res,next) => {
                         user: user,
                         token: token
                     })
+
                 }
             }
         }
 
-
         if(isMobile(auth)) {
 
-            const mobileUser = await User.findOne({email: auth});
+            const mobileUser = await User.findOne({mobile: auth, isActivate: true});
 
             if (!mobileUser) {
-                return next(createError(400, 'User not found'))
+                return next(createError(400, 'User not valid'))
             }
 
             if (mobileUser) {
@@ -298,6 +299,7 @@ export const userLogin = async (req,res,next) => {
                         user: mobileUser,
                         token: token
                     })
+
                 }
             }
         }
@@ -406,8 +408,6 @@ export const forgotPassword = async (req, res, next) => {
 
 export const findForgotPasswordLink = async (req, res, next) => {
     const {auth} = req.body;
-
-
     try{
 
         let emailData = null;
@@ -554,8 +554,7 @@ export const userLogout = async (req, res, next) => {
         try{
 
             res.status(200).json({
-                message: "logout Successful",
-                user:null
+                message: "logout Successful"
             })
 
 
@@ -565,17 +564,106 @@ export const userLogout = async (req, res, next) => {
 }
 
 export const getAllUserData = async (req, res, next) => {
+
+    try{
+        const {id} = req.params;
+
+        const users = await User.find().where("_id").ne(id);
+
+        if (users){
+            res.status(200).json({
+                users:users
+            })
+        }
+
+    }catch (error) {
+        next(error)
+    }
+}
+
+export const friendRequestSend = async (req, res, next) => {
     try{
 
-        const user = await User.find();
+        const {senderId, receiverId} = req.params;
 
-        res.status(200).json({
-            user:user
+        const sender = await User.findById(senderId);
+        const receiver = await User.findById(receiverId);
+
+        await receiver.updateOne({
+            $push : { request: senderId }
+        })
+
+        await receiver.updateOne({
+            $push : { followers: senderId }
+        })
+
+
+        await sender.updateOne({
+            $push : { following: receiverId }
+        })
+
+        const user = await User.findById(senderId);
+
+            res.status(200).json({
+            message:"Friend request send",
+            sender: user
         })
 
     }catch (error) {
         next(error)
     }
 }
+
+
+export const confirmFriendRequest = async (req, res, next) => {
+    try{
+
+        const {senderId, receiverId} = req.params;
+
+        const sender = await User.findById(senderId);
+        const receiver = await User.findById(receiverId);
+
+        await sender.updateOne({
+            $push : { friends: receiverId }
+        })
+
+        await receiver.updateOne({
+            $push : { friends: senderId }
+        })
+
+        await receiver.updateOne({
+            $pull : { request: senderId }
+        })
+
+        const user = await User.findById(receiverId);
+
+        res.status(200).json({
+            message: "Friend request accepted successfully",
+            user:user
+        })
+
+    }catch (error) {
+
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

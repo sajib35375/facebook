@@ -36,12 +36,19 @@ import Auth from "../Auth/Auth";
 import {Link, useNavigate} from "react-router-dom";
 import useData from "../../hook/useData";
 import usePopupClose from "../../hook/usePopupClose";
+import FbModal from "../../components/FbModal/FbModal";
+import { FaUserGroup } from "react-icons/fa6";
+import profile from './../../assets/images/me.jpg';
+import { CiFaceSmile } from "react-icons/ci";
+import { GrMore } from "react-icons/gr";
 
 const Home = () => {
 
     const [show, setShow] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [postModalShow, setPostModalShow] = useState(false);
+
 
     const handleDropdown = (e) => {
         e.preventDefault();
@@ -53,15 +60,13 @@ const Home = () => {
         }
     }
 
-    const {user} = useSelector(state=>state.auth)
+    const {user, loginState} = useSelector(state=>state.auth)
 
     const handleUserLogout = (e) => {
         e.preventDefault();
 
         dispatch(userLogout())
     }
-
-    const {loginState} = useSelector(state=>state.auth);
 
     const handleProfile = () => {
         navigate("/profile")
@@ -72,9 +77,7 @@ const Home = () => {
     }
 
     const userDropDown = useRef(null);
-
-
-   usePopupClose(userDropDown, setShow)
+    usePopupClose(userDropDown, setShow)
 
 
     return (
@@ -82,6 +85,8 @@ const Home = () => {
 
            {
                loginState ? <>
+
+
 
                    <div className="headerContainer">
                        <div className="leftPart">
@@ -290,8 +295,9 @@ const Home = () => {
                            <div className="sendPostArea">
                                <div className="post">
                                    <Avatar/>
-                                   <input placeholder="What's on your mind, Shahnewaj?" type="text"/>
+                                   <input onClick={()=>setPostModalShow(!postModalShow)} placeholder="What's on your mind, Shahnewaj?" type="text"/>
                                </div>
+
                                <div className="underline"></div>
                                <div className="footer">
                                    <div className="item">
@@ -309,6 +315,58 @@ const Home = () => {
                                </div>
                            </div>
                            <div className="viewPostArea">
+                               {
+                                   postModalShow && <FbModal title="Create Post" modalPopUp={setPostModalShow}>
+                                       <form action="">
+                                           <div className="userArea">
+                                               <img className="postUser" src={profile} alt=""/>
+                                               <div className="userInfo">
+                                                   <span className="name">Shahnewaj Sajib</span>
+                                                   <div className="optionSelect">
+                                                       <FaUserGroup/>
+                                                       <select className="optionTag" name="" id="">
+                                                           <option value="">Friends</option>
+                                                       </select>
+                                                   </div>
+                                               </div>
+                                           </div>
+                                           <div className="postArea">
+                                               <textarea placeholder={`What's on your mind ${user.first_name}`}
+                                                         className="portHere" name="" id=""></textarea>
+                                           </div>
+                                           <div className="iconArea">
+                                               <img className="postLeftIcon"
+                                                    src="https://www.facebook.com/images/composer/SATP_Aa_square-2x.png"
+                                                    alt=""/>
+                                               <CiFaceSmile className="postRightIcon"/>
+                                           </div>
+                                           <div className="addPostArea">
+                                               <div className="text">
+                                                   <h3>Add to your post</h3>
+                                               </div>
+                                               <div className="postIcons">
+                                                   <img
+                                                       src="https://static.xx.fbcdn.net/rsrc.php/v3/y7/r/Ivw7nhRtXyo.png"
+                                                       alt=""/>
+                                                   <img
+                                                       src="https://static.xx.fbcdn.net/rsrc.php/v3/yq/r/b37mHA1PjfK.png"
+                                                       alt=""/>
+                                                   <img
+                                                       src="https://static.xx.fbcdn.net/rsrc.php/v3/yd/r/Y4mYLVOhTwq.png"
+                                                       alt=""/>
+                                                   <img
+                                                       src="https://static.xx.fbcdn.net/rsrc.php/v3/y1/r/8zlaieBcZ72.png"
+                                                       alt=""/>
+                                                   <img
+                                                       src="https://static.xx.fbcdn.net/rsrc.php/v3/yT/r/q7MiRkL7MLC.png"
+                                                       alt=""/>
+                                                   <GrMore/>
+                                               </div>
+                                           </div>
+                                           <button>Post</button>
+                                       </form>
+                                   </FbModal>
+                               }
                                <div className="topPart">
                                    <div className="leftArea">
                                        <img src={profilePic} alt=""/>
@@ -350,132 +408,8 @@ const Home = () => {
                                    <div className="underline"></div>
                                </div>
                            </div>
-                           <div className="viewPostArea">
-                               <div className="topPart">
-                                   <div className="leftArea">
-                                       <img src={profilePic} alt=""/>
-                                       <div className="content">
-                                           <p>Shahnewaj sajib</p>
-                                           <span>30m.</span> <LiaGlobeAmericasSolid/>
-                                       </div>
-                                   </div>
-                                   <div className="rightArea">
-                                       <IoIosMore className="icon"/>
-                                   </div>
-                               </div>
-                               <div className="postArea">
-                                   <div className="caption">
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus earum
-                                           exercitationem iure labore magni minus suscipit tempore tenetur ut vel.</p>
-                                   </div>
-                                   <div className="photoVideo">
-                                       <img src={img} alt=""/>
-                                   </div>
-                               </div>
-                               <div className="postFooterArea">
-                                   <div className="topPartReaction">
-                                       <p>sajib,ashraf,imran and others</p>
-                                       <p>35 comments</p>
-                                   </div>
-                                   <div className="underline"></div>
-                                   <div className="bottomPartReaction">
-                                       <div className="like">
-                                           <AiOutlineLike/> Like
-                                       </div>
-                                       <div className="commects">
-                                           <FaRegComment/> Comments
-                                       </div>
-                                       <div className="share">
-                                           <IoIosShareAlt/> Share
-                                       </div>
-                                   </div>
-                                   <div className="underline"></div>
-                               </div>
-                           </div>
-                           <div className="viewPostArea">
-                               <div className="topPart">
-                                   <div className="leftArea">
-                                       <img src={profilePic} alt=""/>
-                                       <div className="content">
-                                           <p>Shahnewaj sajib</p>
-                                           <span>30m.</span> <LiaGlobeAmericasSolid/>
-                                       </div>
-                                   </div>
-                                   <div className="rightArea">
-                                       <IoIosMore className="icon"/>
-                                   </div>
-                               </div>
-                               <div className="postArea">
-                                   <div className="caption">
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus earum
-                                           exercitationem iure labore magni minus suscipit tempore tenetur ut vel.</p>
-                                   </div>
-                                   <div className="photoVideo">
-                                       <img src={img} alt=""/>
-                                   </div>
-                               </div>
-                               <div className="postFooterArea">
-                                   <div className="topPartReaction">
-                                       <p>sajib,ashraf,imran and others</p>
-                                       <p>35 comments</p>
-                                   </div>
-                                   <div className="underline"></div>
-                                   <div className="bottomPartReaction">
-                                       <div className="like">
-                                           <AiOutlineLike/> Like
-                                       </div>
-                                       <div className="commects">
-                                           <FaRegComment/> Comments
-                                       </div>
-                                       <div className="share">
-                                           <IoIosShareAlt/> Share
-                                       </div>
-                                   </div>
-                                   <div className="underline"></div>
-                               </div>
-                           </div>
-                           <div className="viewPostArea">
-                               <div className="topPart">
-                                   <div className="leftArea">
-                                       <img src={profilePic} alt=""/>
-                                       <div className="content">
-                                           <p>Shahnewaj sajib</p>
-                                           <span>30m.</span> <LiaGlobeAmericasSolid/>
-                                       </div>
-                                   </div>
-                                   <div className="rightArea">
-                                       <IoIosMore className="icon"/>
-                                   </div>
-                               </div>
-                               <div className="postArea">
-                                   <div className="caption">
-                                       <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Doloribus earum
-                                           exercitationem iure labore magni minus suscipit tempore tenetur ut vel.</p>
-                                   </div>
-                                   <div className="photoVideo">
-                                       <img src={img} alt=""/>
-                                   </div>
-                               </div>
-                               <div className="postFooterArea">
-                                   <div className="topPartReaction">
-                                       <p>sajib,ashraf,imran and others</p>
-                                       <p>35 comments</p>
-                                   </div>
-                                   <div className="underline"></div>
-                                   <div className="bottomPartReaction">
-                                       <div className="like">
-                                           <AiOutlineLike/> Like
-                                       </div>
-                                       <div className="commects">
-                                           <FaRegComment/> Comments
-                                       </div>
-                                       <div className="share">
-                                           <IoIosShareAlt/> Share
-                                       </div>
-                                   </div>
-                                   <div className="underline"></div>
-                               </div>
-                           </div>
+
+
                        </div>
                        <div className="rightPart">
 

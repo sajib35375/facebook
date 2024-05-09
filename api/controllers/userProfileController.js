@@ -43,3 +43,19 @@ export const userFeaturedPhotoUpload = async (req, res, next) => {
         next(error)
     }
 }
+
+export const userProfilePhotoUpload = async (req, res, next) => {
+    try{
+        const {id} = req.params;
+
+        await User.findByIdAndUpdate(id,{profile_photo:req.file.filename},{new:true})
+
+        res.status(200).json({
+            message:"Profile photo uploaded successfully",
+            fileName:req.file.filename
+        })
+
+    }catch (error) {
+        next(error)
+    }
+}

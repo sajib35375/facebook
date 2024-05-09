@@ -3,10 +3,10 @@ import {notifyError, notifySuccess} from "../../utility/Toast";
 import Cookies from "js-cookie";
 import {
     BIO_UPDATE_FAIL,
-    BIO_UPDATE_SUCCESS,
+    BIO_UPDATE_SUCCESS, FRIEND_REQUEST_CONFIRM, FRIEND_REQUEST_SEND, GET_ALL_USER,
     LOGIN_FAIL,
     LOGIN_REQUEST,
-    LOGIN_SUCCESS,
+    LOGIN_SUCCESS, PROFILE_PHOTO_UPLOAD,
     TOKEN_USER_FAIL,
     TOKEN_USER_REQ,
     TOKEN_USER_SUCCESS, USER_LOGOUT
@@ -186,7 +186,7 @@ export const userLogout = () => async (dispatch) => {
             type:LOADER_START
         })
 
-        await axios.get('/api/v1/user/logout/').then(res=>{
+        await axios.post('/api/v1/user/logout/').then(res=>{
             notifySuccess(res.data.message)
             dispatch({
                 type: USER_LOGOUT
@@ -249,6 +249,85 @@ export const featuredPhotos = (data, id) => async (dispatch) => {
         notifyError('axios error')
     }
 }
+
+
+export const profilePhoto = (id, data) => async(dispatch) => {
+    try{
+
+        await axios.put(`/api/v1/user/profile/profile-photo-update/${id}`, data).then((res)=>{
+            notifySuccess(res.data.message)
+            dispatch({
+                type:PROFILE_PHOTO_UPLOAD,
+                payload:res.data.fileName
+            })
+        }).catch((error)=>{
+            notifyError(error.response.data.message)
+        })
+
+    }catch (error) {
+        notifyError(error.message)
+    }
+}
+
+
+export const getAllUser = (id) => async (dispatch) => {
+    try{
+
+        await axios.get(`/api/v1/user/${id}`).then((res)=>{
+
+            dispatch({
+                type: GET_ALL_USER,
+                payload: res.data.users
+            })
+
+        }).catch((error)=>{
+            notifyError(error.response.data.message)
+        })
+
+    }catch (error) {
+        notifyError(error.response.data.message)
+    }
+}
+
+
+export const friendRequestSend = (senderId, receiverId) => async (dispatch) => {
+    try{
+
+        await axios.get(`/api/v1/user/add-friend/${senderId}/${receiverId}`).then((res)=>{
+            notifySuccess(res.data.message)
+            dispatch({
+                type:FRIEND_REQUEST_SEND,
+                payload: res.data.sender
+            })
+        }).catch((error)=>{
+            notifyError(error.response.data.message)
+        })
+    }catch (error) {
+        notifyError(error.message)
+    }
+}
+
+
+export const friendRequestConfirm = (senderId, receiverId) => async (dispatch) => {
+    try{
+
+        await axios.get(`/api/v1/user/confirm-friend-request/${senderId}/${receiverId}`).then((res)=>{
+            notifySuccess(res.data.message)
+            dispatch({
+                type:FRIEND_REQUEST_CONFIRM,
+                payload: res.data.user
+            })
+        }).catch((error)=>{
+            notifyError(error.response.data.message)
+        })
+    }catch (error) {
+        notifyError(error.message)
+    }
+}
+
+
+
+
 
 
 

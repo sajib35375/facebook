@@ -12,7 +12,9 @@ import {
     checkForgotPasswordLink,
     changeForgotPassword,
     userLogout,
-    getAllUserData
+    getAllUserData,
+    friendRequestSend,
+    confirmFriendRequest
 } from '../controllers/userController.js';
 import  { authMiddleware }  from '../middlewares/authMiddleware.js';
 import { loginMiddleware } from '../middlewares/loginMiddleware.js';
@@ -20,27 +22,20 @@ import { loginMiddleware } from '../middlewares/loginMiddleware.js';
 const router = express.Router();
 
 
-
-
-
-
-
-
-
-
-
 router.route('/').post( register)
-router.route('/').get( getAllUserData)
 router.route('/login').post(userLogin);
 router.route('/activation/:token').get(activateAccount);
 router.route('/activation-code/').post(activateAccountByCode);
 router.route('/activation-resent-link/').post(activateAccountResentLink);
 router.route('/me').get(getUserLoggedIn);
-router.route('/logout').get(userLogout);
+router.route('/logout').post(userLogout);
 router.route('/forgot-password').post(forgotPassword);
 router.route('/find-forgot-password-link').post(findForgotPasswordLink);
 router.route('/check-forgot-password-link').post(checkForgotPasswordLink);
 router.route('/change-forgot-password').post(changeForgotPassword);
 router.route('/:id').delete(deleteUser);
+router.route('/:id').get( getAllUserData)
+router.route('/add-friend/:senderId/:receiverId').get(friendRequestSend)
+router.route('/confirm-friend-request/:senderId/:receiverId').get(confirmFriendRequest)
 
 export default router;

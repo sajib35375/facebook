@@ -889,16 +889,15 @@ body {
               }
           }
         }
-    }
 
-    .viewPostArea {
-      width: 730px;
-      background-color: #ffffff;
-      margin-top: 20px;
-      padding: 10px;
-      .topPart {
-        display: flex;
-        justify-content: space-between;
+      .viewPostArea {
+        width: 730px;
+        background-color: #ffffff;
+        margin-top: 20px;
+        padding: 10px;
+        .topPart {
+          display: flex;
+          justify-content: space-between;
           .leftArea {
             display: flex;
             gap: 5px;
@@ -913,58 +912,61 @@ body {
               }
             }
           }
-        .rightArea {
+          .rightArea {
             .icon {
               font-size: 20px;
             }
-        }
-      }
-
-      .postArea {
-        .caption {
-          padding: 10px 20px;
-          p {
-
           }
         }
-        .photoVideo {
+
+        .postArea {
+          .caption {
+            padding: 10px 20px;
+            p {
+
+            }
+          }
+          .photoVideo {
             img {
               width: 100%;
             }
+          }
         }
-      }
-      .postFooterArea {
+        .postFooterArea {
           display: flex;
           flex-direction: column;
-            .topPartReaction {
-              display: flex;
-              justify-content: space-between;
-              padding: 0px 10px;
-                p {
-                  font-family: 'Poppins', sans-serif;
-                  font-size: 14px;
-                  font-weight: 200;
-                  color: #000;
-                  margin-top: 5px;
-                }
-            }
-        .underline {
-          width: 100%;
-          height: 1px;
-          background-color: #e9e9e9;
-          margin-bottom: 10px;
-        }
-
-        .bottomPartReaction {
+          .topPartReaction {
             display: flex;
-          justify-content: space-between;
-          padding: 10px 20px;
+            justify-content: space-between;
+            padding: 0px 10px;
+            p {
+              font-family: 'Poppins', sans-serif;
+              font-size: 14px;
+              font-weight: 200;
+              color: #000;
+              margin-top: 5px;
+            }
+          }
+          .underline {
+            width: 100%;
+            height: 1px;
+            background-color: #e9e9e9;
+            margin-bottom: 10px;
+          }
+
+          .bottomPartReaction {
+            display: flex;
+            justify-content: space-between;
+            padding: 10px 20px;
             .like {
 
             }
+          }
         }
       }
     }
+
+
 }
 
 .error-field {
@@ -1108,6 +1110,192 @@ body {
       align-items: center;
       flex-direction: column;
       background-color: #ffffff;
+      position: relative;
+  .modalBlur {
+    position: fixed;
+    left: 0;
+    top: 0;
+    right: 0;
+    background-color: rgba(255,255,266,0.7);
+    z-index: 99999999;
+    .modalWrapper {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+
+      .modalContainer {
+        width: 700px;
+        background-color: #fff;
+        z-index: 9999999;
+        box-shadow: 0px 0px 5px #777777;
+        border-radius: 10px;
+        .modalTop {
+          padding: 0px 10px;
+          .title {
+            text-align: center;
+            display: block;
+            margin: auto 0px;
+            span {
+              font-family: 'Roboto', sans-serif;
+              font-weight: bold;
+              font-size: 20px;
+            }
+            a.cross{
+              float: right;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              background-color: #e9e9e9;
+              color: #000;
+              font-size: 18px;
+              margin-bottom: 10px;
+            }
+            a.back{
+              float: left;
+              width: 30px;
+              height: 30px;
+              border-radius: 50%;
+              background-color: #e9e9e9;
+              color: #000;
+              font-size: 18px;
+              margin-bottom: 10px;
+            }
+          }
+          .Fb-underline {
+            width: 100%;
+            height: 1px;
+            background-color: #e9e9e9;
+            margin-top: 10px;
+            margin-bottom: 10px;
+          }
+        }
+
+        .modalBody {
+            width: 100%;
+          .profilePicContainer {
+            width: 100%;
+            min-height: 400px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 10px 20px;
+            .uploadPhoto {
+              width: 90%;
+              text-align: center;
+              height: 15px;
+              background-color: #DFE9F2;
+              box-sizing: content-box;
+              border-radius: 10px;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              label {
+                color: #005FC6;
+                font-weight: 400;
+              }
+            }
+            .imageCropArea {
+              width: 100%;
+              position: relative;
+              min-height: 400px;
+              margin-bottom: 100px;
+              .description{
+                width: 100%;
+                height: 100px;
+                resize: none;
+                outline: none;
+                border: 1px solid #ccc;
+                border-radius: 10px;
+              }
+              textarea.description::-moz-placeholder {
+                padding: 10px;
+                margin-top: 10px;
+              }
+              textarea.description:-moz-placeholder {
+                padding: 10px;
+                margin-top: 10px;
+              }
+              textarea.description::placeholder {
+                padding: 10px;
+                margin-top: 10px;
+              }
+
+              .cropZone {
+                width: 100%;
+
+
+                .reactEasyCrop_Container {
+                  width: 100%;
+                  margin-top: 150px!important;
+                  .reactEasyCrop_Contain {
+                    width: 100%;
+                    height: 300px;
+                  }
+                }
+
+              }
+            }
+            .zoomArea {
+              width: 100%;
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              button{
+                border: none;
+                background-color: transparent;
+
+              }
+              .inputRange {
+                width: 350px;
+                transform: translate(0px, 3px);
+                appearance: none;
+                height: 5px;
+                background-color: #CED0D4;
+                border-radius: 5px;
+              }
+              .inputRange::-webkit-slider-thumb {
+                appearance: none;
+                width: 20px;
+                height: 20px;
+                border-radius: 50%;
+                background-color: #fff;
+                border: 2px solid #ccc;
+              }
+            }
+
+            .cropBtn {
+              display: flex;
+              justify-content: center;
+              align-items: center;
+              gap: 7px;
+              button {
+                border: none;
+                padding: 7px;
+                border-radius: 4px;
+              }
+            }
+            .footerBtn{
+              width: 100%;
+              display: flex;
+              justify-content: flex-end;
+              gap: 7px;
+              button {
+                border: none;
+                padding: 7px;
+                border-radius: 5px;
+              }
+              button.save {
+                background-color: #0861F2;
+                color: #fff;
+              }
+            }
+          }
+        }
+
+      }
+    }
+  }
 
   .underline {
     height: 1px;
@@ -1179,6 +1367,20 @@ body {
             height: 160px;
             border-radius: 50%;
             border: 5px solid #ffffff;
+          }
+          button {
+            width: 30px;
+            height: 30px;
+            border: none;
+            border-radius: 50%;
+            position: absolute;
+            left: 107px;
+            bottom: 8px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #D8DADF;
           }
           .userInfo {
             display: flex;
@@ -1525,10 +1727,12 @@ body {
     .postFooterArea {
       display: flex;
       flex-direction: column;
+
       .topPartReaction {
         display: flex;
         justify-content: space-between;
         padding: 0px 10px;
+
         p {
           font-family: 'Poppins', sans-serif;
           font-size: 14px;
@@ -1537,6 +1741,7 @@ body {
           margin-top: 5px;
         }
       }
+
       .underline {
         width: 100%;
         height: 1px;
@@ -1548,11 +1753,190 @@ body {
         display: flex;
         justify-content: space-between;
         padding: 10px 20px;
+
         .like {
 
         }
       }
     }
+      .modalBlur {
+        position: fixed;
+        left: 0;
+        top: 0;
+        right: 0;
+        background-color: rgba(255, 255, 266, 0.7);
+        z-index: 99999999;
+
+        .modalWrapper {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+
+          .modalContainer {
+            width: 450px;
+            background-color: #fff;
+            z-index: 9999999;
+            box-shadow: 0px 0px 5px #777777;
+            border-radius: 10px;
+
+            .modalTop {
+              padding: 0px 10px;
+
+              .title {
+                text-align: center;
+                display: block;
+                margin: auto 0px;
+
+                span {
+                  font-family: 'Roboto', sans-serif;
+                  font-weight: bold;
+                  font-size: 20px;
+                }
+
+                a.cross {
+                  float: right;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 50%;
+                  background-color: #e9e9e9;
+                  color: #000;
+                  font-size: 18px;
+                  margin-bottom: 10px;
+                }
+
+                a.back {
+                  float: left;
+                  width: 30px;
+                  height: 30px;
+                  border-radius: 50%;
+                  background-color: #e9e9e9;
+                  color: #000;
+                  font-size: 18px;
+                  margin-bottom: 10px;
+                }
+              }
+
+              .Fb-underline {
+                width: 100%;
+                height: 1px;
+                background-color: #e9e9e9;
+                margin-top: 10px;
+                margin-bottom: 10px;
+              }
+            }
+
+            .modalBody {
+              width: 100%;
+              height: 350px;
+              padding: 10px 20px;
+              .userArea{
+                display: flex;
+                justify-content: flex-start;
+                width: 170px;
+                align-items: center;
+                gap: 5px;
+                img.postUser {
+                  width: 35px;
+                  height: 35px;
+                  border-radius: 50%;
+                }
+                .userInfo {
+                  display: flex;
+                  flex-direction: column;
+
+                  span.name{
+                    font-size: 13px;
+                    font-weight: 600;
+                  }
+
+                  .optionSelect {
+                    display: flex;
+                    background-color: #E4E6EB;
+                    padding: 3px 6px;
+                    border-radius: 5px;
+                    .optionTag {
+                      width: 65px;
+                      font-size: 12px;
+                      font-weight: 600;
+                      border: none;
+                    }
+                  }
+                }
+              }
+              .postArea {
+                width: 100%;
+                height: 60%;
+                textarea.portHere {
+                  width: 100%;
+                  height: 120px;
+                  border: none;
+                  margin-top: 20px;
+                  resize: none;
+                }
+                textarea.portHere:focus{
+                  outline: none;
+                }
+                textarea.portHere::placeholder {
+                  font-size: 23px;
+                }
+              }
+
+              .iconArea {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                width: 100%;
+                img.postLeftIcon {
+                  width: 35px;
+                  height: 35px;
+                }
+                .postRightIcon {
+                  font-size: 26px;
+                }
+              }
+
+              .addPostArea {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 10px;
+                border: 1px solid #ccc;
+                padding: 10px;
+                border-radius: 5px;
+                .text{
+                  h3{
+                    font-size: 18px;
+                    font-weight: 400;
+                  }
+                }
+                .postIcons {
+                  display: flex;
+                  gap: 10px;
+                  align-items: center;
+                }
+              }
+
+              button {
+                display: flex;
+                width: 100%;
+                justify-content: center;
+                margin-top: 5px;
+                height: 32px;
+                border: none;
+                align-items: center;
+                border-radius: 5px;
+              }
+            }
+
+
+
+
+          }
+
+        }
+      }
+
   }
 }
 
@@ -1613,7 +1997,7 @@ body {
               margin-bottom: 10px;
             }
           }
-          .underline {
+          .Fb-underline {
             width: 100%;
             height: 1px;
             background-color: #e9e9e9;
@@ -1945,7 +2329,7 @@ body {
           justify-content: flex-start;
           flex-wrap: wrap;
           a {
-            width: 110px;
+            width: 100px;
             margin-top: 5px;
             .item {
               width: 100%;
@@ -2742,9 +3126,253 @@ body {
 
 
 
+.reactEasyCrop_CropAreaRound {
+  width: 300px;
+  height: 300px;
+}
+
+.friendContainer {
+    width: 100vw;
+    height: 100vh;
+    margin-top: 1px;
+    .friendWrapper {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      
+        .friendsOptions {
+          width: 20%;
+          background-color: #fff;
+          padding: 5px 10px;
+            .friendsHeader {
+                display: flex;
+                justify-content: space-between;
+                width: 100%;
+                .item {
+                  h1{
+                    font-size: 22px;
+                    font-weight: 700;
+                  }
+                }
+              span {
+                width: 35px;
+                height: 35px;
+                border-radius: 50%;
+                background-color: #D8DADF;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                  .settingIcon {
+                      font-size: 22px;
+                  }
+              }
+            }
+            .options {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin-top: 15px;
+                .home {
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  align-items: center;
+                  margin-bottom: 15px;
+                  .item {
+                    width: 100%;
+                    display: flex;
+                    align-items: center;
+                    gap: 10px;
+                    span {
+                      width: 35px;
+                      height: 35px;
+                      border-radius: 50%;
+                      background-color: #D8DADF;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+
+                      .optionsIcon {
+                          font-size: 22px;
+                      }
+                    }
+                    h2{
+                      font-size: 18px;
+                      font-weight: 400;
+                      margin-top: 5px;
+                    }
+                  }
+                  .forwardIcon {
+                      font-size: 24px;
+                  }
+                }
+            }
+        }
+
+
+      .allFriends {
+          width: 80%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          margin-top: 20px;
+          .friendsRequest {
+              width: 100%;
+              border-bottom: 1px solid #ccc;
+              padding: 5px 10px;
+              display: flex;
+              flex-wrap: wrap;
+              gap: 5px;
+              .requestFriendsHeader {
+                  width: 100%;
+                  display: flex;
+                  justify-content: space-between;
+                  h2 {
+                    font-size: 22px;
+                    font-weight: 700;
+                  }
+                  a {
+                    margin-right: 10px;
+                  }
+              }
+
+              .friendsItem {
+                  width: 16%;
+                  height: 355px;
+                  background-color: #fff;
+                  margin-bottom: 30px;
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-evenly;
+                  border-radius: 5px;
+                  img.friendImage {
+                    width: 100%;
+                    height: 205px;
+                    border-radius: 5px;
+                    padding: 1px;
+                  }
+                  .friendsContent {
+                      width: 100%;
+                      height: 80%;
+                      padding: 10px 10px;
+                      display: flex;
+                      flex-direction: column;
+                      justify-content: space-between;
+                      h3 {
+                        font-size: 18px;
+                        font-weight: 600;
+                      }
+                      .mutual {
+                          width: 100%;
+                          height: 100%;
+                          display: flex;
+                          align-items: center;
+                          img.mutualPhoto {
+                            width: 20px;
+                            height: 20px;
+                            border-radius: 50%;
+                          }
+                      }
+                      .buttonsItem {
+                          width: 100%;
+                          display: flex;
+                          flex-direction: column;
+                          gap: 5px;
+                          button {
+                            border: none;
+                            height: 30px;
+                            border-radius: 5px;
+                          }
+                          button.confirm {
+                            background-color: #0861F2;
+                            color: #fff;
+                          }
+                      }
+                  }
+              }
+          }
+        .youMayKnow {
+          width: 100%;
+          border-bottom: 1px solid #ccc;
+          padding: 5px 10px;
+          display: flex;
+          flex-wrap: wrap;
+          gap: 5px;
+          .requestFriendsHeader {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            h2 {
+              font-size: 22px;
+              font-weight: 700;
+            }
+            a {
+              margin-right: 10px;
+            }
+          }
+          .friendsItem {
+            width: 16%;
+            height: 355px;
+            background-color: #fff;
+            margin-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            border-radius: 5px;
+            img.friendImage {
+              width: 100%;
+              height: 205px;
+              border-radius: 5px;
+              padding: 1px;
+            }
+            .friendsContent {
+              width: 100%;
+              height: 80%;
+              padding: 10px 10px;
+              display: flex;
+              flex-direction: column;
+              justify-content: space-between;
+              h3 {
+                font-size: 18px;
+                font-weight: 600;
+              }
+              .mutual {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                img.mutualPhoto {
+                  width: 20px;
+                  height: 20px;
+                  border-radius: 50%;
+                }
+              }
+              .buttonsItem {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                gap: 5px;
+                button {
+                  border: none;
+                  height: 30px;
+                  border-radius: 5px;
+                }
+                button.confirm {
+                  background-color: #0861F2;
+                  color: #fff;
+                }
+              }
+            }
+          }
+        }
+      }
 
 
 
+    }
+
+
+}
 
 
 
